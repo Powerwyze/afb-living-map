@@ -1,0 +1,9 @@
+{
+  "name": "afb-living-map",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PowerWyze AF&B 2026 Living Map — talk-to-map demo (landscape, not a portrait kiosk)",
+  "engines": {
+    "node": ">=20"
+  }
+}

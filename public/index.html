@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#07080C" />
+  <title>AF&amp;B Living Map · PowerWyze</title>
+  <meta name="description" content="Talk to the Americas Food & Beverage 2026 floorplan — Halls A–C at Miami Beach Convention Center, Sep 14–16." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml" />
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <div class="bg__glow" aria-hidden="true"></div>
+  <div class="bg__grain" aria-hidden="true"></div>
+
+  <div class="app">
+    <header class="topbar" role="banner">
+      <div class="brand" aria-label="PowerWyze">
+        <img class="brand__mark" src="/assets/logo.svg" alt="" />
+        <div class="brand__text">
+          <span class="brand__name">POWERWYZE</span>
+          <span class="brand__sub">Living Map demo</span>
+        </div>
+      </div>
+      <div class="titleblock">
+        <h1 class="titleblock__h">AF&amp;B 2026 · Talk to the map</h1>
+        <p class="titleblock__p">Americas Food &amp; Beverage Show &amp; Conference · 30th Anniversary</p>
+      </div>
+      <div class="event-meta">
+        <span class="event-meta__day">SEP 14–16 2026</span>
+        <span class="event-meta__loc">Miami Beach Convention Center</span>
+      </div>
+    </header>
+
+    <div class="badge-row">
+      <span class="pill pill--gold">INTERNAL DEMO</span>
+      <span class="pill">RELATED · DEMO-002 / T-021</span>
+      <span class="pill" id="keyPill">Checking chat…</span>
+    </div>
+
+    <main class="split" role="main">
+      <section class="map-panel" aria-label="AF&amp;B floorplan">
+        <div class="map-toolbar">
+          <div class="map-toolbar__left">
+            <span class="map-toolbar__label">MBCC · Halls A · B · C</span>
+          </div>
+          <div class="map-toolbar__actions">
+            <button type="button" class="icon-btn" id="zoomOut" title="Zoom out" aria-label="Zoom out">−</button>
+            <button type="button" class="icon-btn" id="zoomIn" title="Zoom in" aria-label="Zoom in">+</button>
+            <button type="button" class="icon-btn" id="zoomFit" title="Fit map" aria-label="Fit map">⛶</button>
+            <button type="button" class="icon-btn" id="toggleLegend" title="Legend" aria-label="Toggle legend">i</button>
+            <a class="btn btn--ghost" href="https://maps.goeshow.com/atec/amfoodbev/2026/Floorplan" target="_blank" rel="noopener noreferrer">Open live floorplan</a>
+            <button type="button" class="btn btn--ghost" id="toggleEmbed">Try live embed</button>
+          </div>
+        </div>
+
+        <div class="map-stage" id="mapStage">
+          <div class="map-world" id="mapWorld">
+            <img
+              id="floorplanImg"
+              class="floorplan"
+              src="/assets/afb-floorplan.png"
+              alt="Americas Food & Beverage 2026 floorplan at Miami Beach Convention Center, Halls A B and C"
+              draggable="false"
+            />
+            <div class="overlays" id="overlays" aria-hidden="true"></div>
+          </div>
+          <aside class="legend" id="legend" hidden>
+            <h2>Legend</h2>
+            <ul>
+              <li><i class="swatch swatch--sold"></i> Sold (green)</li>
+              <li><i class="swatch swatch--pending"></i> Pending (yellow)</li>
+              <li><i class="swatch swatch--avail"></i> Available</li>
+              <li><i class="swatch swatch--reserved"></i> Reserved / stages / lounges (orange)</li>
+            </ul>
+            <p>Booth IDs are mostly numeric. Screenshot OCR is uncertain — answers prefer official exhibitor-list booths and hall/zone landmarks.</p>
+          </aside>
+        </div>
+
+        <div class="embed-wrap" id="embedWrap" hidden>
+          <p class="embed-note">Goeshow may block framing. If the pane is blank, use the screenshot above and <a href="https://maps.goeshow.com/atec/amfoodbev/2026/Floorplan" target="_blank" rel="noopener noreferrer">open the live floorplan</a>.</p>
+          <iframe
+            id="embedFrame"
+            title="Live Goeshow AF&amp;B 2026 floorplan"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+            referrerpolicy="no-referrer"
+          ></iframe>
+        </div>
+
+        <div class="chips" id="zoneChips" aria-label="Map landmarks"></div>
+      </section>
+
+      <section class="chat-panel" aria-label="Talk to the map">
+        <header class="chat-head">
+          <h2>Talk to the map</h2>
+          <p>Ask for halls, pavilions, paths, or an exhibitor. Answers stay grounded in the captured floorplan and the official Goeshow list.</p>
+        </header>
+        <div class="prompts" id="prompts"></div>
+        <div class="transcript" id="transcript" role="log" aria-live="polite"></div>
+        <form class="composer" id="composer">
+          <label class="sr-only" for="chatInput">Ask the map</label>
+          <textarea id="chatInput" rows="2" maxlength="800" placeholder="Where is the Brazil Pavilion from the entrance?" required></textarea>
+          <div class="composer__row">
+            <button type="button" class="icon-btn" id="micBtn" title="Voice input" aria-label="Voice input" hidden>mic</button>
+            <button type="submit" class="btn btn--primary" id="sendBtn">Ask</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>PowerWyze · AF&amp;B 30th · MBCC · Sept 14–16 2026</span>
+      <span class="footer__sub">Screenshot is the primary map. Live Goeshow: maps.goeshow.com/atec/amfoodbev/2026/Floorplan</span>
+    </footer>
+  </div>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

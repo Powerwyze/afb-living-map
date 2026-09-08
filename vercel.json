@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "framework": null,
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), geolocation=()" }
+      ]
+    }
+  ],
+  "rewrites": [
+    { "source": "/favicon.ico", "destination": "/assets/logo.svg" }
+  ],
+  "functions": {
+    "api/chat.js": { "maxDuration": 30 },
+    "api/health.js": { "maxDuration": 10 }
+  }
+}
