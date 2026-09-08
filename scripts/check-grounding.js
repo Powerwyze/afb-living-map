@@ -17,8 +17,9 @@ assert.equal(hapcor.booth, "463");
 const atlantic = data.exhibitors.find((e) => e.name === "Atlantic Grocery Supply");
 assert.equal(atlantic.booth, "1809");
 
-const brazil = localSearch(data, "Brazil Pavilion");
+const brazil = localSearch(data, "Where is the Brazil Pavilion?");
 assert.ok(brazil.zones.some((z) => z.id === "brazil"));
+assert.ok(brazil.faq.length >= 1);
 
 const booth = localSearch(data, "429");
 assert.ok(booth.matches.some((m) => m.name === "ABIMAPI"));
